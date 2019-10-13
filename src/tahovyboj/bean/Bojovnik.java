@@ -1,36 +1,15 @@
-/* www.devbook.cz :-) */
-
 package tahovyboj.bean;
 
 public class Bojovnik {
-    /**
-     * Jméno bojovníka
-     */
-    protected String jmeno;
-    /**
-     * Život v HP
-     */
-    protected int zivot;
-    /**
-     * Maximální zdraví
-     */
-    protected int maxZivot;
-    /**
-     * Útok v HP
-     */
-    protected int utok;
-    /**
-     * Obrana v HP
-     */
-    protected int obrana;
-    /**
-     * Instance hrací kostky
-     */
-    protected Kostka kostka;
-    /**
-     * Poslední zpráva
-     */
-    protected String zprava;
+
+    protected String jmeno; // Jméno bojovníka
+    protected int zivot; // Život v HP
+    protected int maxZivot; // Maximální zdraví
+    protected int utok; // Útok v HP
+    protected int obrana; // Obrana v HP
+    protected Kostka kostka; // Instance hrací kostky
+    protected String zprava; // Poslední zpráva
+    protected Zbran zbran;
 
     /**
      * Vytvoří novou instanci bojovníka
@@ -41,13 +20,14 @@ public class Bojovnik {
      * @param obrana Obrana v HP
      * @param kostka Instance hrací kostky
      */
-    public Bojovnik(String jmeno, int zivot, int utok, int obrana, Kostka kostka) {
+    public Bojovnik(String jmeno, int zivot, int utok, int obrana, Kostka kostka, Zbran zbran) {
         this.jmeno = jmeno;
         this.zivot = zivot;
         this.maxZivot = zivot;
         this.utok = utok;
         this.obrana = obrana;
         this.kostka = kostka;
+        this.zbran = zbran;
     }
 
     /**
@@ -56,8 +36,8 @@ public class Bojovnik {
      * @param souper Soupeř bojovník
      */
     public void utoc(Bojovnik souper) {
-        int uder = utok + kostka.hod();
-        nastavZpravu(String.format("%s útočí s úderem za %s hp", jmeno, uder));
+        int uder = utok + zbran.getUtok() + kostka.hod();
+        setZprava(String.format("%s útočí s úderem za %s hp", jmeno, uder));
         souper.branSe(uder);
     }
 
@@ -78,7 +58,7 @@ public class Bojovnik {
 
         } else
             zprava = String.format("%s odrazil útok", jmeno);
-        nastavZpravu(zprava);
+        setZprava(zprava);
     }
 
     /**
@@ -95,7 +75,7 @@ public class Bojovnik {
      *
      * @param zprava Zpráva o útoku nebo obraně
      */
-    protected void nastavZpravu(String zprava) {
+    protected void setZprava(String zprava) {
         this.zprava = zprava;
     }
 
@@ -104,7 +84,7 @@ public class Bojovnik {
      *
      * @return Poslední zpráva o útoku nebo obraně
      */
-    public String vratPosledniZpravu() {
+    public String getZprava() {
         return zprava;
     }
 

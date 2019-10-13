@@ -1,23 +1,10 @@
-/* www.devbook.cz :-) */
-
 package tahovyboj.bean;
 
-/**
- * Třída reprezentuje mága
- */
 public class Mag extends Bojovnik {
-    /**
-     * Mana
-     */
-    private int mana;
-    /**
-     * Maximální mana, tedy hodnota, kdy je mana plná a lze ji použít
-     */
-    private int maxMana;
-    /**
-     * Magický útok v HP
-     */
-    private int magickyUtok;
+
+    private int mana; // Mana
+    private int maxMana; // Maximální mana, tedy hodnota, kdy je mana plná a lze ji použít
+    private int magickyUtok; // Magický útok v HP
 
     /**
      * Vytvoří novou instanci mága
@@ -30,8 +17,8 @@ public class Mag extends Bojovnik {
      * @param mana        Mana
      * @param magickyUtok Magický útok v HP
      */
-    public Mag(String jmeno, int zivot, int utok, int obrana, Kostka kostka, int mana, int magickyUtok) {
-        super(jmeno, zivot, utok, obrana, kostka);
+    public Mag(String jmeno, int zivot, int utok, int obrana, Kostka kostka, Zbran zbran, int mana, int magickyUtok) {
+        super(jmeno, zivot, utok, obrana, kostka, zbran);
         this.mana = mana;
         this.maxMana = mana;
         this.magickyUtok = magickyUtok;
@@ -53,7 +40,7 @@ public class Mag extends Bojovnik {
         } else {
             // Magický útok
             int uder = magickyUtok + kostka.hod();
-            nastavZpravu(String.format("%s použil magii za %s hp", jmeno, uder));
+            setZprava(String.format("%s použil magii za %s hp", jmeno, uder));
             souper.branSe(uder);
             mana = 0;
         }

@@ -42,13 +42,13 @@ public class Arena {
         while (b1.nazivu() && b2.nazivu()) {
             b1.utoc(b2);
             vykresli();
-            vypisZpravu(b1.vratPosledniZpravu()); // zpráva o útoku
-            vypisZpravu(b2.vratPosledniZpravu()); // zpráva o obraně                  
+            vypisZpravu(b1.getZprava()); // zpráva o útoku
+            vypisZpravu(b2.getZprava()); // zpráva o obraně
             if (b2.nazivu()) {
                 b2.utoc(b1);
                 vykresli();
-                vypisZpravu(b2.vratPosledniZpravu()); // zpráva o útoku
-                vypisZpravu(b1.vratPosledniZpravu()); // zpráva o obraně
+                vypisZpravu(b2.getZprava()); // zpráva o útoku
+                vypisZpravu(b1.getZprava()); // zpráva o obraně
             }
             System.out.println();
         }
